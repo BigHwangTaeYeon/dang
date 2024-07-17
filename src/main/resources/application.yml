@@ -1,0 +1,47 @@
+#spring.application.name=demo
+
+spring:
+  config:
+    import:
+      - classpath:/yml/oauth_secret.yml
+  application:
+    name: user-application
+  datasource:
+    url: jdbc:mysql://localhost:3306/mungmoMember?useUnicode=true&characterEncoding=utf8
+    username: mungmo
+    password: 1234
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        globally_quoted_identifiers: true
+        format_sql: true
+        use_sql_comments: true
+        dialect: org.hibernate.dialect.MySQLDialect
+
+logging:
+  level:  # log4jdbc, Mybatis Console Log
+    com:
+      zaxxer:
+        hikari: INFO
+    javax:
+      sql:
+        DataSource: OFF
+    jdbc:
+      audit: OFF
+      resultset: OFF
+      resultsettable: INFO  #SQL ?? ??? Table? ??? ???.
+      sqlonly: OFF     #SQL? ??? ???.
+      sqltiming: INFO    #SQL? ????? ????.
+      connection : OFF  # ??? ????
+    org:
+      hibernate:
+        SQL: DEBUG
+        type:
+          descriptor:
+            sql: TRACE
+        orm:
+          jdbc:
+            bind: trace
